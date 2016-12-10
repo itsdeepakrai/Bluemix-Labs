@@ -1,0 +1,54 @@
+
+**** 
+
+Lab1 - Activity 3 (Page 8)
+
+
+var accelerationZ = msg.payload.d.acceleration_z;
+var isAlreadySwitchedOn = context.get('isAlreadySwitchedOn') || false;
+// For Android reverse this test !!!
+if (accelerationZ > 0) {    
+	if (!isAlreadySwitchedOn) {
+		isAlreadySwitchedOn = true;
+		msg.eventOrCommandType = "light";
+		msg.payload = JSON.stringify({"d":{"text":"Received light on message"}}); 
+	}
+} else {
+	if (isAlreadySwitchedOn) {
+		isAlreadySwitchedOn = false;
+		msg.eventOrCommandType = "light";
+		msg.payload = JSON.stringify({"d":{"text":"Received light off message"}}); 
+	} 
+}
+context.set('isAlreadySwitchedOn', isAlreadySwitchedOn);
+return msg;
+
+
+**** Lab 1 - Activity 3 (Page 11)
+
+
+
+{"d":{"value":"text"}}
+
+
+
+
+
+
+
+
+
+
+
+**** Lab2 (Page 3)
+
+
+return {payload: Math.abs(msg.payload.d.acceleration_y)};
+
+
+**** Lab2 (Page 5)
+
+
+
+[Your name here], Wow! Is your phone falling? 
+Its acceleration y = {{payload}}!
